@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Clínica LM">
+<meta name="description" content="Batería de Evaluación Psicológica · Clínica Cuidando tu Salud Mental">
+<title>Clínica Cuidando tu Salud Mental | LM — Evaluación Psicológica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Josefin+Sans:wght@300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
+<style>
+:root {
+  --ink:       #0e1520;
+  --gold:      #c8a84b;
+  --gold2:     #e8d5a0;
+  --cream:     #f9f6ef;
+  --parch:     #ede8d8;
+  --steel:     #1e3a5f;
+  --steel-l:   #dde6f0;
+  --burg:      #6b1f2e;
+  --burg-l:    #f5e8eb;
+  --sage:      #2d5a3d;
+  --sage-l:    #e2ede5;
+  --plum:      #4a2060;
+  --plum-l:    #ede0f5;
+  --muted:     #6b6b7a;
+  --border:    #d8d0bb;
+  --white:     #ffffff;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  background:var(--cream);
+  color:var(--ink);
+  min-height:100vh;
+  font-size:17px;
+  line-height:1.7;
+}
+
+/* ── HEADER ── */
+#app-header{
+  background:var(--ink);
+  padding:1.4rem 1.5rem 1.2rem;
+  text-align:center;
+  border-bottom:3px solid var(--gold);
+  position:sticky;top:0;z-index:100;
+}
+.clinic-badge{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.6rem;letter-spacing:.3em;color:var(--gold);
+  border:1px solid var(--gold);
+  display:inline-block;padding:.2rem .8rem;margin-bottom:.6rem;
+}
+#app-header h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem,3.5vw,1.8rem);
+  color:var(--cream);font-weight:700;line-height:1.2;
+}
+.header-name{color:var(--gold);font-size:.95rem;font-weight:600;margin-top:.2rem;}
+.header-sub{color:var(--gold2);font-size:.8rem;font-style:italic;font-weight:300;}
+
+/* ── PROGRESS ── */
+#progress-bar-wrap{
+  background:var(--ink);
+  padding:.5rem 1.5rem;
+  display:none;
+  align-items:center;gap:.8rem;
+  border-bottom:1px solid rgba(200,168,75,.3);
+}
+.prog-label{font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.2em;color:var(--gold);white-space:nowrap;}
+.prog-outer{flex:1;height:4px;background:rgba(255,255,255,.1);border-radius:2px;}
+.prog-inner{height:100%;background:var(--gold);border-radius:2px;transition:width .5s ease;width:0%;}
+.prog-pct{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--gold2);min-width:2.5rem;text-align:right;}
+
+/* ── NAV TABS ── */
+#section-tabs{
+  background:var(--parch);
+  border-bottom:2px solid var(--border);
+  display:none;overflow-x:auto;
+  padding:0 1rem;
+}
+.s-tab{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;
+  padding:.75rem 1rem;border:none;background:transparent;
+  color:var(--muted);cursor:pointer;
+  border-bottom:3px solid transparent;
+  white-space:nowrap;transition:all .2s;
+}
+.s-tab.active{color:var(--ink);border-bottom-color:var(--gold);}
+.s-tab.done{color:var(--sage);}
+
+/* ── MAIN ── */
+main{max-width:780px;margin:0 auto;padding:2rem 1.2rem 4rem;}
+
+/* ── SCREENS ── */
+.screen{display:none;}
+.screen.active{display:block;}
+
+/* ── INTRO ── */
+.intro-hero{
+  background:var(--ink);
+  margin:-2rem -1.2rem 2rem;
+  padding:2.5rem 1.5rem 2rem;
+  text-align:center;
+}
+.intro-hero h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,3vw,1.8rem);
+  color:var(--cream);margin-bottom:.4rem;
+}
+.intro-hero p{color:var(--gold2);font-style:italic;font-size:.9rem;}
+.intro-hero .by{color:rgba(255,255,255,.5);font-size:.75rem;margin-top:.5rem;}
+
+.module-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1.5rem;}
+@media(max-width:480px){.module-grid{grid-template-columns:1fr;}}
+.module-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;padding:1rem;
+}
+.mod-icon{font-size:1.4rem;margin-bottom:.4rem;}
+.mod-title{font-family:'Josefin Sans',sans-serif;font-size:.62rem;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:.3rem;}
+.mod-desc{font-size:.83rem;color:var(--muted);line-height:1.5;}
+
+.instructions-box{
+  background:var(--sage-l);
+  border-left:3px solid var(--sage);
+  padding:.9rem 1.1rem;margin-bottom:1.5rem;
+  font-size:.88rem;color:#1e3d28;
+}
+.instructions-box ul{padding-left:1.1rem;margin-top:.4rem;}
+.instructions-box li{margin-bottom:.25rem;}
+
+.candidate-box{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:6px;padding:1.4rem;margin-bottom:1.5rem;
+}
+.candidate-box h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;margin-bottom:.9rem;color:var(--ink);
+}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+@media(max-width:480px){.form-grid{grid-template-columns:1fr;}}
+.form-field{display:flex;flex-direction:column;gap:.25rem;}
+.form-field.full{grid-column:1/-1;}
+.form-field label{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);
+}
+.form-field input,.form-field select{
+  border:1px solid var(--border);
+  background:var(--cream);
+  padding:.5rem .7rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;color:var(--ink);
+  border-radius:3px;outline:none;
+  transition:border-color .2s;
+  -webkit-appearance:none;
+}
+.form-field input:focus,.form-field select:focus{border-color:var(--gold);}
+
+/* ── SECTION HEADER ── */
+.sec-header{margin-bottom:1.5rem;padding-bottom:.8rem;border-bottom:1px solid var(--border);}
+.sec-tag{font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.25em;color:var(--gold);margin-bottom:.3rem;}
+.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,3vw,1.8rem);font-weight:700;color:var(--ink);}
+.sec-sub{font-style:italic;color:var(--muted);font-size:.88rem;margin-top:.2rem;}
+.theory-box{
+  background:var(--steel-l);
+  border-left:3px solid var(--steel);
+  padding:.85rem 1rem;
+  margin:1rem 0 1.5rem;
+  font-size:.88rem;color:#1a2a3d;
+  font-style:italic;
+}
+.theory-box strong{font-style:normal;color:var(--steel);}
+
+/* ── QUESTION BLOCKS ── */
+.q-block{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:6px;
+  padding:1.3rem 1.4rem;
+  margin-bottom:1rem;
+  transition:border-color .2s,background .2s;
+}
+.q-block.answered{border-color:var(--sage);background:#fafff9;}
+.q-num{font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.2em;color:var(--gold);margin-bottom:.3rem;}
+.q-text{font-size:.97rem;font-weight:600;color:var(--ink);line-height:1.5;margin-bottom:.8rem;}
+.q-hint{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:.7rem;}
+
+/* LIKERT */
+.likert-row{display:flex;gap:.35rem;}
+.likert-btn{
+  flex:1;padding:.55rem .2rem;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--muted);
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.8rem;border-radius:3px;
+  cursor:pointer;transition:all .15s;
+  min-width:0;
+}
+.likert-btn:hover{border-color:var(--gold);color:var(--ink);}
+.likert-btn.sel{background:var(--ink);border-color:var(--ink);color:var(--gold);font-weight:600;}
+.likert-labels{
+  display:flex;justify-content:space-between;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.5rem;color:var(--muted);
+  letter-spacing:.05em;margin-top:.3rem;
+}
+
+/* CHOICE */
+.choice-btn{
+  display:block;width:100%;text-align:left;
+  padding:.65rem .9rem;
+  border:1px solid var(--border);
+  background:transparent;color:var(--ink);
+  border-radius:3px;margin-bottom:.4rem;
+  cursor:pointer;font-size:.93rem;
+  font-family:'Cormorant Garamond',serif;
+  line-height:1.4;transition:all .15s;
+}
+.choice-btn:hover{border-color:var(--gold);background:var(--parch);}
+.choice-btn.sel{background:var(--ink);color:var(--cream);border-color:var(--ink);}
+.choice-btn.sel .choice-letter{color:var(--gold);}
+.choice-letter{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.65rem;color:var(--gold);
+  display:inline-block;min-width:1.4rem;
+}
+
+/* ── BUTTONS ── */
+.btn-primary{
+  background:var(--ink);color:var(--gold);
+  border:none;padding:.85rem 2rem;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.7rem;letter-spacing:.2em;
+  text-transform:uppercase;cursor:pointer;
+  border-radius:3px;transition:all .2s;
+  display:inline-flex;align-items:center;gap:.5rem;
+}
+.btn-primary:hover{background:var(--gold);color:var(--ink);}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+.btn-secondary{
+  background:transparent;
+  border:1px solid var(--border);
+  padding:.75rem 1.4rem;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.65rem;letter-spacing:.12em;
+  color:var(--muted);cursor:pointer;
+  border-radius:3px;transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--ink);color:var(--ink);}
+.btn-row{
+  display:flex;gap:.8rem;justify-content:flex-end;
+  margin-top:2rem;padding-top:1.5rem;
+  border-top:1px solid var(--border);
+  flex-wrap:wrap;
+}
+
+/* ── VALIDATION ── */
+.val-msg{
+  background:#fff3cd;border:1px solid #ffc107;
+  padding:.7rem 1rem;border-radius:4px;
+  font-size:.88rem;color:#856404;
+  margin-bottom:1rem;display:none;
+}
+
+/* ── LOADING ── */
+#loading-overlay{
+  display:none;position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(14,21,32,.93);
+  z-index:999;
+  justify-content:center;align-items:center;
+  flex-direction:column;gap:1rem;
+}
+#loading-overlay.show{display:flex;}
+.spinner{
+  width:48px;height:48px;
+  border:3px solid rgba(200,168,75,.2);
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{
+  font-family:'Josefin Sans',sans-serif;
+  color:var(--gold);font-size:.7rem;
+  letter-spacing:.2em;
+}
+
+/* ── RESULTS ── */
+.results-hero{
+  background:var(--ink);
+  margin:-2rem -1.2rem 2rem;
+  padding:2rem 1.5rem;
+  text-align:center;
+  border-bottom:3px solid var(--gold);
+}
+.results-hero .clinic{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;letter-spacing:.25em;color:var(--gold);margin-bottom:.3rem;
+}
+.results-hero h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,3vw,1.8rem);
+  color:var(--cream);margin-bottom:.2rem;
+}
+.results-hero .cand{color:var(--gold2);font-style:italic;}
+.results-hero .meta{color:rgba(255,255,255,.4);font-size:.75rem;margin-top:.2rem;}
+
+.overall-card{
+  background:var(--ink);
+  border:2px solid var(--gold);
+  border-radius:8px;
+  padding:1.6rem;
+  margin-bottom:1.8rem;
+}
+.overall-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;color:var(--gold);margin-bottom:1rem;
+}
+.scores-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin-bottom:1.1rem;}
+.score-tile{
+  background:rgba(255,255,255,.06);
+  border-radius:5px;padding:.9rem;text-align:center;
+}
+.score-tile-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:700;color:var(--gold);
+}
+.score-tile-lbl{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.5rem;color:var(--gold2);
+  letter-spacing:.1em;text-transform:uppercase;margin-top:.1rem;
+}
+.score-tile-lvl{font-family:'Josefin Sans',sans-serif;font-size:.58rem;margin-top:.15rem;}
+.overall-analysis{
+  background:rgba(255,255,255,.04);
+  border-radius:4px;padding:1rem;
+  font-style:italic;color:var(--gold2);
+  font-size:.9rem;line-height:1.7;
+}
+
+.area-card{
+  background:var(--white);
+  border:1px solid var(--border);
+  border-radius:8px;
+  margin-bottom:1.5rem;
+  overflow:hidden;
+}
+.area-card-head{
+  padding:1rem 1.4rem;
+  display:flex;justify-content:space-between;
+  align-items:center;flex-wrap:wrap;gap:.5rem;
+}
+.area-card-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;color:var(--cream);font-weight:600;
+}
+.area-card-score{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.85rem;color:var(--gold);font-weight:600;
+}
+.area-card-body{padding:1.4rem;}
+
+.score-bar-wrap{margin:.6rem 0 1rem;}
+.score-bar-lbl{
+  display:flex;justify-content:space-between;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.55rem;color:var(--muted);margin-bottom:.3rem;
+}
+.score-bar-outer{height:7px;background:var(--parch);border-radius:4px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:4px;transition:width 1.2s ease;}
+
+.dim-grid{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:1rem 0;}
+@media(max-width:480px){.dim-grid{grid-template-columns:1fr;}}
+.dim-item{
+  background:var(--cream);border:1px solid var(--border);
+  border-radius:4px;padding:.75rem;
+}
+.dim-lbl{font-family:'Josefin Sans',sans-serif;font-size:.52rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;}
+.dim-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;}
+.dim-lvl{font-family:'Josefin Sans',sans-serif;font-size:.52rem;margin-top:.1rem;}
+.dim-desc{font-size:.8rem;color:var(--muted);font-style:italic;margin-top:.2rem;}
+
+.interp-box{
+  border-left:3px solid var(--gold);
+  padding:.85rem 1rem;
+  background:var(--parch);
+  font-size:.92rem;font-style:italic;
+  line-height:1.6;margin:1rem 0;
+}
+
+.recom-list{list-style:none;padding:0;margin:.7rem 0;}
+.recom-list li{
+  padding:.45rem 0 .45rem 1.4rem;
+  border-bottom:1px solid var(--border);
+  font-size:.92rem;position:relative;
+}
+.recom-list li:last-child{border-bottom:none;}
+.recom-list li::before{content:'▸';position:absolute;left:0;color:var(--gold);}
+
+/* Observaciones evaluador */
+.obs-box{
+  background:var(--ink);
+  border:2px dashed var(--gold);
+  border-radius:6px;padding:1.2rem;
+  margin:1rem 0;
+}
+.obs-title{
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;letter-spacing:.15em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:.7rem;
+}
+.obs-line{
+  border-bottom:1px solid rgba(200,168,75,.4);
+  margin-bottom:.9rem;height:1px;
+}
+.verdict-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:.8rem;}
+.verdict-item{
+  display:flex;align-items:center;gap:.4rem;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;color:var(--gold2);letter-spacing:.05em;
+}
+.verdict-check{
+  width:14px;height:14px;
+  border:1px solid var(--gold);
+  border-radius:2px;flex-shrink:0;
+}
+
+/* Export */
+.export-box{
+  background:var(--parch);
+  border:1px solid var(--border);
+  border-radius:6px;padding:1.8rem;
+  text-align:center;margin-bottom:2rem;
+}
+.export-box h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem;margin-bottom:.4rem;
+}
+.export-box p{font-size:.88rem;color:var(--muted);margin-bottom:1.2rem;}
+.export-btns{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;}
+
+/* Footer */
+.doc-footer{
+  text-align:center;
+  padding:1.2rem;
+  background:var(--parch);
+  border:1px solid var(--border);
+  border-radius:6px;
+  margin-bottom:1.5rem;
+  font-family:'Josefin Sans',sans-serif;
+  font-size:.58rem;color:var(--muted);
+  letter-spacing:.05em;line-height:1.8;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="app-header">
+  <div class="clinic-badge">CLÍNICA CUIDANDO TU SALUD MENTAL</div>
+  <h1>Batería de Evaluación Psicológica<br>Selección de Personal Directivo</h1>
+  <div class="header-name">Licda. Lourdes Monterroso</div>
+  <div class="header-sub">Psicóloga Industrial y Organizacional</div>
+</header>
+
+<!-- PROGRESS -->
+<div id="progress-bar-wrap">
+  <span class="prog-label">PROGRESO</span>
+  <div class="prog-outer"><div class="prog-inner" id="prog-fill"></div></div>
+  <span class="prog-pct" id="prog-pct">0%</span>
+</div>
+
+<!-- TABS -->
+<div id="section-tabs">
+  <button class="s-tab active" id="tab-ie">01 · IE</button>
+  <button class="s-tab" id="tab-lid">02 · Liderazgo</button>
+  <button class="s-tab" id="tab-temp">03 · Temperamento</button>
+  <button class="s-tab" id="tab-perf">04 · Competencias</button>
+</div>
+
+<!-- LOADING -->
+<div id="loading-overlay">
+  <div class="spinner"></div>
+  <div class="loading-text">PROCESANDO RESULTADOS…</div>
+</div>
+
+<main>
+
+<!-- ═══════════════════════════════════════════════ INTRO -->
+<div id="screen-intro" class="screen active">
+  <div class="intro-hero">
+    <h2>Evaluación Psicológica Integral</h2>
+    <p>Instrumento psicométrico multidimensional · Fundamento científico</p>
+    <div class="by">Elaborado y supervisado por Licda. Lourdes Monterroso · Psicóloga Industrial y Organizacional</div>
+  </div>
+
+  <div class="module-grid">
+    <div class="module-card"><div class="mod-icon">🧠</div><div class="mod-title">Inteligencia Emocional</div><div class="mod-desc">25 ítems · MSCEIT + Bar-On · 5 dimensiones clave para el liderazgo.</div></div>
+    <div class="module-card"><div class="mod-icon">🎯</div><div class="mod-title">Estilos de Liderazgo</div><div class="mod-desc">20 ítems · MLQ-5X Bass & Avolio · Transformacional, transaccional y laissez-faire.</div></div>
+    <div class="module-card"><div class="mod-icon">🌡️</div><div class="mod-title">Temperamento</div><div class="mod-desc">20 ítems · Cloninger TCI-R + Keirsey · 4 tipos con implicaciones directivas.</div></div>
+    <div class="module-card"><div class="mod-icon">📋</div><div class="mod-title">Competencias Directivas</div><div class="mod-desc">10 situaciones SJT · 5 áreas · Validez predictiva alta para cargos directivos.</div></div>
+  </div>
+
+  <div class="instructions-box">
+    <strong>Instrucciones importantes:</strong>
+    <ul>
+      <li><strong>75 ítems en 4 secciones.</strong> Duración estimada: 35–45 minutos.</li>
+      <li>Responda con total <strong>sinceridad</strong>. No hay respuestas correctas ni incorrectas.</li>
+      <li>Elija la opción que <strong>mejor refleje</strong> su comportamiento habitual, no el ideal.</li>
+      <li>Complete la evaluación <strong>sin interrupciones</strong> para mayor validez.</li>
+      <li>Al finalizar, podrá <strong>descargar el informe en Word</strong> listo para editar.</li>
+    </ul>
+  </div>
+
+  <div class="candidate-box">
+    <h3>Datos del Candidato/a</h3>
+    <div class="form-grid">
+      <div class="form-field full"><label>Nombre completo</label><input type="text" id="f-nombre" placeholder="Nombre y apellidos completos"></div>
+      <div class="form-field"><label>Edad</label><input type="number" id="f-edad" placeholder="Años" min="18" max="70"></div>
+      <div class="form-field"><label>Años de experiencia directiva</label><input type="number" id="f-exp" placeholder="Años" min="0"></div>
+      <div class="form-field full"><label>Formación académica</label>
+        <select id="f-form">
+          <option value="">Seleccionar…</option>
+          <option>Técnico / Tecnólogo</option>
+          <option>Licenciatura / Pregrado</option>
+          <option>Especialización</option>
+          <option>Maestría / Magíster</option>
+          <option>Doctorado</option>
+        </select>
+      </div>
+      <div class="form-field full"><label>Área de formación principal</label><input type="text" id="f-area" placeholder="Ej: Pedagogía, Psicología educativa, Administración…"></div>
+      <div class="form-field"><label>Institución aplicante</label><input type="text" id="f-inst" placeholder="Nombre del colegio / institución"></div>
+      <div class="form-field"><label>Fecha de evaluación</label><input type="date" id="f-fecha"></div>
+    </div>
+  </div>
+
+  <div class="btn-row" style="border-top:none;padding-top:0;">
+    <button class="btn-primary" onclick="startTest()">INICIAR EVALUACIÓN →</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════ SECCIONES -->
+<div id="screen-ie" class="screen"></div>
+<div id="screen-liderazgo" class="screen"></div>
+<div id="screen-temperamento" class="screen"></div>
+<div id="screen-perfil" class="screen"></div>
+
+<!-- ═══════════════════════════════════════════════ RESULTADOS -->
+<div id="screen-results" class="screen">
+  <div class="results-hero">
+    <div class="clinic">CLÍNICA CUIDANDO TU SALUD MENTAL · LICDA. LOURDES MONTERROSO</div>
+    <h2>Informe de Evaluación Psicológica</h2>
+    <div class="cand" id="r-nombre">—</div>
+    <div class="meta" id="r-meta">—</div>
+  </div>
+
+  <div id="r-overall"></div>
+  <div id="r-ie"></div>
+  <div id="r-liderazgo"></div>
+  <div id="r-temperamento"></div>
+  <div id="r-perfil"></div>
+  <div id="r-conclusiones"></div>
+
+  <div class="export-box">
+    <h3>Exportar Informe</h3>
+    <p>Descargue el informe completo en Word editable con membrete de la clínica para agregar sus observaciones profesionales</p>
+    <div class="export-btns">
+      <button class="btn-primary" id="btn-word" onclick="exportWord()">⬇ DESCARGAR INFORME WORD</button>
+      <button class="btn-secondary" onclick="window.print()">🖨 IMPRIMIR</button>
+      <button class="btn-secondary" onclick="resetAll()">↺ NUEVA EVALUACIÓN</button>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    CLÍNICA CUIDANDO TU SALUD MENTAL · Licda. Lourdes Monterroso · Psicóloga Industrial y Organizacional<br>
+    Instrumentos: MSCEIT (Mayer & Salovey, 2002) · MLQ-5X (Bass & Avolio, 1990) · TCI-R (Cloninger, 1994) · SJT (McDaniel et al., 2007)<br>
+    DOCUMENTO CONFIDENCIAL — Uso exclusivo del área de Recursos Humanos
+  </div>
+</div>
+
+</main>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATOS
+// ═══════════════════════════════════════════════════════════════
+const IE_Q = [
+  {id:"ie1",dim:"autoconciencia",inv:false,text:"Identifico con precisión qué emoción experimento, incluso cuando es compleja o contradictoria."},
+  {id:"ie2",dim:"autoconciencia",inv:false,text:"Cuando me siento irritable, reconozco la causa emocional sin que pase mucho tiempo."},
+  {id:"ie3",dim:"autoconciencia",inv:true, text:"Con frecuencia me sorprenden mis propias reacciones emocionales; no suelo anticiparlas."},
+  {id:"ie4",dim:"autoconciencia",inv:false,text:"Tengo consciencia clara de cómo mis emociones influyen en mis decisiones y relaciones laborales."},
+  {id:"ie5",dim:"autoconciencia",inv:true, text:"Me resulta difícil describir con palabras lo que siento cuando estoy bajo presión intensa."},
+  {id:"ie6",dim:"autorregulacion",inv:false,text:"Ante crisis o tensión, mantengo calma suficiente para tomar decisiones racionales antes de actuar."},
+  {id:"ie7",dim:"autorregulacion",inv:false,text:"Cuando alguien me critica injustamente en público, respondo de manera serena y profesional."},
+  {id:"ie8",dim:"autorregulacion",inv:true, text:"Tengo dificultad para controlar mi frustración cuando las cosas no salen como las planeé."},
+  {id:"ie9",dim:"autorregulacion",inv:false,text:"Reflexiono antes de dar una respuesta emocional en situaciones de alta tensión interpersonal."},
+  {id:"ie10",dim:"autorregulacion",inv:true,text:"Cuando cometo errores, rumio la situación durante tiempo prolongado y me cuesta superarlos."},
+  {id:"ie11",dim:"motivacion",inv:false,text:"Más allá del reconocimiento o salario, me moviliza el impacto positivo de mi trabajo en los demás."},
+  {id:"ie12",dim:"motivacion",inv:false,text:"Persisto en mis objetivos institucionales aunque los avances sean lentos o los resultados no inmediatos."},
+  {id:"ie13",dim:"motivacion",inv:true, text:"Los obstáculos frecuentes del entorno me desaniman de manera significativa."},
+  {id:"ie14",dim:"motivacion",inv:false,text:"Me propongo metas exigentes y me esfuerzo genuinamente por superarlas, no solo por cumplir lo mínimo."},
+  {id:"ie15",dim:"motivacion",inv:false,text:"Encuentro sentido en las tareas cotidianas de mi trabajo, aunque no sean reconocidas."},
+  {id:"ie16",dim:"empatia",inv:false,text:"Percibo con facilidad cuando un colega o estudiante está en dificultad emocional, aunque no lo diga."},
+  {id:"ie17",dim:"empatia",inv:false,text:"Adapto mi forma de comunicarme según el estado emocional que percibo en mi interlocutor."},
+  {id:"ie18",dim:"empatia",inv:true, text:"Me cuesta ponerme en el lugar de personas cuya forma de ver las cosas es muy diferente a la mía."},
+  {id:"ie19",dim:"empatia",inv:false,text:"Cuando un padre o docente está angustiado, contengo emocionalmente la situación antes de dar soluciones."},
+  {id:"ie20",dim:"empatia",inv:false,text:"Escucho activamente sin preparar mi respuesta mientras el otro aún habla."},
+  {id:"ie21",dim:"social",inv:false,text:"Genero un clima de confianza y apertura en los equipos de trabajo que lidero o acompaño."},
+  {id:"ie22",dim:"social",inv:false,text:"Manejo con eficacia las dinámicas de grupo cuando hay tensiones o conflictos entre miembros del equipo."},
+  {id:"ie23",dim:"social",inv:true, text:"Me cuesta influir positivamente en el estado de ánimo del equipo cuando el ambiente está cargado de negatividad."},
+  {id:"ie24",dim:"social",inv:false,text:"Expreso mis puntos de vista de forma asertiva sin herir innecesariamente a otros."},
+  {id:"ie25",dim:"social",inv:false,text:"Construyo relaciones laborales basadas en respeto mutuo, incluso con personas con quienes tengo diferencias."},
+];
+
+const LID_Q = [
+  {id:"lid1",dim:"transf",text:"Transmito una visión clara e inspiradora del futuro institucional que compromete al equipo docente."},
+  {id:"lid2",dim:"transf",text:"Me intereso genuinamente en el desarrollo profesional y personal de cada docente, no solo en resultados."},
+  {id:"lid3",dim:"transf",text:"Estimulo el pensamiento crítico, la innovación y el cuestionamiento de prácticas establecidas cuando es necesario."},
+  {id:"lid4",dim:"transf",text:"Soy referente de los valores institucionales; actúo coherentemente con lo que exijo al equipo."},
+  {id:"lid5",dim:"transf",text:"Adapto mi estilo de comunicación y motivación según las necesidades individuales de cada persona del equipo."},
+  {id:"lid6",dim:"transf",text:"En momentos de crisis mi presencia genera confianza y estabilidad en el equipo."},
+  {id:"lid7",dim:"transf",text:"Celebro los logros del equipo y reconozco el esfuerzo individual públicamente cuando está justificado."},
+  {id:"lid8",dim:"transf",text:"Más allá de los objetivos institucionales, me preocupo por el bienestar emocional de quienes lidero."},
+  {id:"lid9",dim:"trans",text:"Establezco con claridad las metas, responsabilidades y consecuencias de cumplir o no los acuerdos."},
+  {id:"lid10",dim:"trans",text:"Hago seguimiento sistemático al desempeño y doy retroalimentación oportuna ante desviaciones."},
+  {id:"lid11",dim:"trans",text:"Uso reconocimiento concreto cuando alguien cumple los estándares esperados."},
+  {id:"lid12",dim:"trans",text:"Tomo acciones correctivas oportunas cuando detecto incumplimiento de funciones."},
+  {id:"lid13",dim:"trans",text:"Los estándares de desempeño que establezco son claros, medibles y conocidos por todos de antemano."},
+  {id:"lid14",dim:"trans",text:"Negocio acuerdos y compromisos concretos antes de iniciar proyectos o ciclos de trabajo."},
+  {id:"lid15",dim:"laissez",text:"Cuando las situaciones no son urgentes, prefiero que el equipo resuelva solo antes de intervenir."},
+  {id:"lid16",dim:"laissez",text:"Evito tomar decisiones hasta que la situación llega a un punto crítico o alguien escala el problema."},
+  {id:"lid17",dim:"laissez",text:"Me resulta difícil intervenir en conflictos del equipo porque prefiero no generar más tensión."},
+  {id:"lid18",dim:"laissez",text:"Suelo delegar ampliamente sin hacer seguimiento estructurado del proceso."},
+  {id:"lid19",dim:"laissez",text:"Prefiero evitar confrontar directamente situaciones de incumplimiento de normas institucionales."},
+  {id:"lid20",dim:"laissez",text:"Dejo que los conflictos entre docentes se resuelvan solos si no afectan directamente los resultados académicos."},
+];
+
+const TEMP_Q = [
+  {id:"t1",dim:"sang",text:"En reuniones soy quien anima el ambiente, propone ideas nuevas y mantiene el ritmo de la conversación."},
+  {id:"t2",dim:"sang",text:"Me adapto con facilidad a cambios imprevistos; incluso los disfruto como oportunidades de creatividad."},
+  {id:"t3",dim:"sang",text:"Conecto rápidamente con personas nuevas y establezco rapport en poco tiempo."},
+  {id:"t4",dim:"sang",text:"Tengo muchas ideas y proyectos en mente pero me cuesta mantener el foco en uno hasta finalizarlo."},
+  {id:"t5",dim:"sang",text:"Las relaciones interpersonales son la fuente más importante de mi energía y motivación laboral."},
+  {id:"t6",dim:"col",text:"En situaciones de decisión, soy quien toma la iniciativa sin necesitar consenso previo del grupo."},
+  {id:"t7",dim:"col",text:"Cuando veo algo que no funciona, actúo de inmediato para corregirlo sin esperar que otros lo señalen."},
+  {id:"t8",dim:"col",text:"Me frustro cuando los procesos son lentos o las personas no actúan con la misma determinación que yo."},
+  {id:"t9",dim:"col",text:"Tengo fuerte orientación al logro: los resultados son más importantes que el proceso o las relaciones en sí."},
+  {id:"t10",dim:"col",text:"Me cuesta delegar porque confío más en mi propio juicio que en la capacidad de otros para hacer las cosas."},
+  {id:"t11",dim:"mel",text:"Antes de decidir, necesito analizar datos, revisar antecedentes y considerar cuidadosamente los riesgos."},
+  {id:"t12",dim:"mel",text:"Tengo altos estándares de calidad y me cuesta aceptar cuando las cosas se hacen a medias."},
+  {id:"t13",dim:"mel",text:"La imprecisión, la improvisación y el desorden me generan incomodidad y ansiedad."},
+  {id:"t14",dim:"mel",text:"Soy profundo/a en mis relaciones: prefiero pocos vínculos pero genuinos y significativos."},
+  {id:"t15",dim:"mel",text:"Tiendo a ser autocrítico/a cuando cometo errores y me resulta difícil perdonarme fácilmente."},
+  {id:"t16",dim:"flem",text:"Me caracteriza la calma y estabilidad emocional, incluso cuando los demás están alterados."},
+  {id:"t17",dim:"flem",text:"Soy paciente: puedo escuchar durante largo tiempo sin sentir necesidad de interrumpir o resolver."},
+  {id:"t18",dim:"flem",text:"Prefiero entornos predecibles con rutinas claras; los cambios abruptos me incomodan."},
+  {id:"t19",dim:"flem",text:"Soy a quien acuden los demás cuando necesitan un mediador o alguien que no tome partido."},
+  {id:"t20",dim:"flem",text:"Me cuesta tomar la iniciativa en proyectos nuevos; prefiero instrucciones claras antes de actuar."},
+];
+
+const PERF_Q = [
+  {id:"p1",dim:"conflicto",text:"Dos docentes llevan semanas en conflicto abierto que afecta el clima del departamento. Como coordinadora, ¿cuál es su primer paso?",
+   opts:[{t:"Convocar a ambos por separado para escuchar su versión antes de intervenir en conjunto.",s:5},{t:"Llamar a los dos juntos de inmediato y mediar en esa reunión.",s:3},{t:"Enviar un comunicado recordando la norma de convivencia institucional.",s:1},{t:"Solicitar al rector que intervenga dado que el conflicto escala.",s:2}]},
+  {id:"p2",dim:"conflicto",text:"Un padre influyente ejerce presión para que su hijo obtenga una calificación que no corresponde a su desempeño real. ¿Cómo responde?",
+   opts:[{t:"Explica con datos objetivos y firmeza el proceso evaluativo, ofreciendo reunión con el docente.",s:5},{t:"Escucha empáticamente y dice que revisará el caso, sin comprometerse a nada.",s:4},{t:"Deriva al rector para evitar el conflicto directo.",s:2},{t:"Acepta revisar la nota para no generar un problema institucional mayor.",s:0}]},
+  {id:"p3",dim:"decision",text:"El día de la graduación el docente responsable de logística no llegó y hay 200 familias esperando. ¿Qué hace en los próximos 10 minutos?",
+   opts:[{t:"Asume la coordinación directamente, asigna roles al equipo disponible y comunica brevemente a la directiva.",s:5},{t:"Busca al docente responsable por teléfono antes de tomar cualquier decisión.",s:2},{t:"Consulta con el rector qué hacer ya que es una decisión que lo involucra.",s:2},{t:"Improvisa con los docentes presentes sin establecer un plan claro.",s:3}]},
+  {id:"p4",dim:"decision",text:"Debe implementar un cambio curricular que ordenó la dirección pero que usted considera pedagógicamente inadecuado. ¿Qué hace?",
+   opts:[{t:"Documenta sus objeciones con argumentos técnicos y solicita reunión con la dirección antes de implementar.",s:5},{t:"Implementa el cambio tal como se ordenó y hace seguimiento para evidenciar el impacto.",s:4},{t:"Implementa el cambio con adaptaciones propias sin consultar a la dirección.",s:2},{t:"Comunica al equipo que la decisión no es suya y que deben acatarla.",s:1}]},
+  {id:"p5",dim:"comunicacion",text:"El equipo docente está desmotivado por exceso de carga administrativa que no se reducirá por directriz institucional. ¿Cómo lo comunica?",
+   opts:[{t:"Convoca reunión, reconoce la carga, explica el contexto con honestidad y propone estrategias para aliviar el impacto.",s:5},{t:"Envía comunicado escrito explicando la situación para que quede documentado.",s:2},{t:"Espera a que la situación se calme antes de abordarla porque el ambiente está muy tenso.",s:0},{t:"Habla individualmente con los docentes que más se quejan.",s:3}]},
+  {id:"p6",dim:"comunicacion",text:"Debe dar retroalimentación a un docente veterano con 20 años de experiencia cuyas prácticas están desactualizadas. ¿Cómo lo aborda?",
+   opts:[{t:"Cita evidencias concretas, reconoce su trayectoria y propone un plan de acompañamiento.",s:5},{t:"Le informa que la dirección ha notado el problema y que debe mejorar.",s:1},{t:"Le señala las dificultades directamente y sin rodeos porque es la forma más honesta.",s:3},{t:"Espera al informe de evaluación anual para hacer la retroalimentación formal.",s:1}]},
+  {id:"p7",dim:"cambio",text:"Se implementará una plataforma digital nueva. Varios docentes y padres manifiestan resistencia abierta. ¿Cuál es su estrategia?",
+   opts:[{t:"Diseña un plan de implementación gradual con formación, acompañamiento y espacios de retroalimentación.",s:5},{t:"Comunica que es una decisión institucional y que todos deben adaptarse en los plazos definidos.",s:2},{t:"Involucra a los docentes más receptivos como agentes de cambio internos y los forma primero.",s:4},{t:"Posterga la implementación en su sección hasta que la resistencia disminuya.",s:0}]},
+  {id:"p8",dim:"cambio",text:"Propone una iniciativa de evaluación formativa innovadora pero el equipo está acostumbrado a la evaluación tradicional. ¿Cómo gestiona la adopción?",
+   opts:[{t:"Implementa un proyecto piloto con voluntarios, documenta resultados y presenta evidencias al resto del equipo.",s:5},{t:"Comunica los beneficios en una reunión y da instrucciones claras de implementación.",s:3},{t:"Impone la nueva metodología de forma gradual como parte del plan de mejora institucional.",s:2},{t:"Espera tener el respaldo explícito de todos antes de implementar cualquier cambio.",s:1}]},
+  {id:"p9",dim:"resultados",text:"Los resultados en pruebas estandarizadas de lenguaje bajaron 15 puntos respecto al año anterior. ¿Cuál es su primer paso?",
+   opts:[{t:"Analiza datos desagregados por grado, docente y tipo de pregunta e identifica patrones antes de actuar.",s:5},{t:"Convoca al equipo de lenguaje para comunicarles los resultados y pedirles un plan de mejora.",s:3},{t:"Informa a la dirección y solicita recursos adicionales para fortalecer el área.",s:2},{t:"Implementa horas adicionales de refuerzo para estudiantes con menor desempeño.",s:3}]},
+  {id:"p10",dim:"resultados",text:"Tiene 3 proyectos institucionales prioritarios pero recursos humanos y temporales limitados. ¿Cómo los gestiona?",
+   opts:[{t:"Prioriza según impacto en aprendizaje, negocia plazos con la dirección y comunica al equipo con claridad.",s:5},{t:"Distribuye las tareas equitativamente entre todos los docentes sin importar sus cargas actuales.",s:2},{t:"Trabaja personalmente en los tres para asegurar la calidad sin sobrecargar al equipo.",s:2},{t:"Implementa los tres de forma parcial simultánea para mostrar avances en todos los frentes.",s:1}]},
+];
+
+// ═══════════════════════════════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════════════════════════════
+let answers = {};
+let candidate = {};
+const TOTAL_Q = IE_Q.length + LID_Q.length + TEMP_Q.length + PERF_Q.length;
+const SEC_MAP  = {ie:IE_Q,liderazgo:LID_Q,temperamento:TEMP_Q,perfil:PERF_Q};
+const SEC_NEXT = {ie:'liderazgo',liderazgo:'temperamento',temperamento:'perfil',perfil:'results'};
+
+function save(){
+  try{localStorage.setItem('clm_ans',JSON.stringify(answers));
+      localStorage.setItem('clm_cand',JSON.stringify(candidate));}catch(e){}
+}
+function loadSaved(){
+  try{
+    const a=localStorage.getItem('clm_ans');
+    const c=localStorage.getItem('clm_cand');
+    if(a) answers=JSON.parse(a);
+    if(c) candidate=JSON.parse(c);
+  }catch(e){}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════════════════════════
+const avg = a => a.length ? a.reduce((s,v)=>s+v,0)/a.length : 0;
+const p100 = v => Math.round(v*20);
+function lvl(p){
+  if(p>=85)return{l:"MUY ALTO",c:"#2d6a4f"};
+  if(p>=70)return{l:"ALTO",c:"#40916c"};
+  if(p>=55)return{l:"MEDIO-ALTO",c:"#74c69d"};
+  if(p>=40)return{l:"MEDIO",c:"#b8860b"};
+  if(p>=25)return{l:"MEDIO-BAJO",c:"#d4622a"};
+  return{l:"BAJO",c:"#c0392b"};
+}
+
+function updateProgress(){
+  const done = Object.keys(answers).length;
+  const pct  = Math.round((done/TOTAL_Q)*100);
+  document.getElementById('prog-fill').style.width = pct+'%';
+  document.getElementById('prog-pct').textContent   = pct+'%';
+}
+
+function showScreen(name){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+name).classList.add('active');
+  // tabs
+  ['ie','lid','temp','perf'].forEach(k=>{
+    const tab = document.getElementById('tab-'+k);
+    if(!tab) return;
+    tab.classList.remove('active','done');
+  });
+  const order=['ie','liderazgo','temperamento','perfil'];
+  const ci = order.indexOf(name);
+  order.forEach((s,i)=>{
+    const tmap={ie:'ie',liderazgo:'lid',temperamento:'temp',perfil:'perf'};
+    const t=document.getElementById('tab-'+tmap[s]);
+    if(!t)return;
+    if(i<ci) t.classList.add('done');
+    else if(i===ci) t.classList.add('active');
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER PREGUNTAS
+// ═══════════════════════════════════════════════════════════════
+function renderSection(secId){
+  const qs = SEC_MAP[secId];
+  const container = document.getElementById('screen-'+secId);
+  const info = {
+    ie:          {tag:'01 / 04',title:'Inteligencia Emocional',sub:'MSCEIT · Mayer, Salovey & Caruso (2002) + Bar-On EQ-i',
+                  theory:'<strong>Marco teórico:</strong> La IE se define como la capacidad para percibir, valorar, comprender y gestionar las emociones propias y ajenas. Para un cargo directivo en contexto educativo, predice la calidad del liderazgo, la gestión de conflictos y el clima institucional (Goleman, 1995; Bar-On, 2006).'},
+    liderazgo:   {tag:'02 / 04',title:'Estilos de Liderazgo',sub:'MLQ-5X · Bass & Avolio (1990)',
+                  theory:'<strong>Marco teórico:</strong> El MLQ distingue el liderazgo transformacional (inspiración y desarrollo), transaccional (intercambio y consecuencias) y laissez-faire (no intervención). En coordinadores educativos, el estilo transformacional se asocia con mayor compromiso docente y mejores resultados institucionales (Leithwood & Jantzi, 2005).'},
+    temperamento:{tag:'03 / 04',title:'Temperamento y Carácter',sub:'TCI-R · Cloninger (1994) + Keirsey (1998)',
+                  theory:'<strong>Marco teórico:</strong> El temperamento representa los patrones automáticos de respuesta emocional y conductual de base biológica. Cloninger identificó dimensiones clave que modulan el estilo de respuesta ante situaciones de estrés institucional, cambio organizacional y relaciones interpersonales.'},
+    perfil:      {tag:'04 / 04',title:'Competencias Directivas',sub:'Situational Judgment Test · McDaniel et al. (2007)',
+                  theory:'<strong>Marco teórico:</strong> El SJT evalúa competencias mediante situaciones contextualizadas con alta validez predictiva para cargos directivos. Se evalúan: gestión del conflicto, toma de decisiones bajo presión, comunicación institucional, gestión del cambio y orientación a resultados educativos.'},
+  }[secId];
+
+  const prevSec = {ie:'intro',liderazgo:'ie',temperamento:'liderazgo',perfil:'temperamento'}[secId];
+  const isLast  = secId==='perfil';
+
+  container.innerHTML = `
+    <div class="sec-header">
+      <div class="sec-tag">${info.tag}</div>
+      <div class="sec-title">${info.title}</div>
+      <div class="sec-sub">${info.sub}</div>
+    </div>
+    <div class="theory-box">${info.theory}</div>
+    <div class="val-msg" id="val-${secId}">⚠ Por favor responda <strong>todos los ítems</strong> antes de continuar.</div>
+    <div id="qs-${secId}"></div>
+    <div class="btn-row">
+      <button class="btn-secondary" onclick="goTo('${prevSec}')">← Anterior</button>
+      <button class="btn-primary" onclick="nextSec('${secId}')">
+        ${isLast?'GENERAR INFORME COMPLETO ✓':'CONTINUAR →'}
+      </button>
+    </div>`;
+
+  const qContainer = document.getElementById('qs-'+secId);
+  qs.forEach(q=>{
+    const div = document.createElement('div');
+    div.className = 'q-block'+(answers[q.id]!==undefined?' answered':'');
+    div.id = 'qb-'+q.id;
+    if(q.opts){
+      div.innerHTML = `
+        <div class="q-num">SITUACIÓN ${q.id.toUpperCase()}</div>
+        <div class="q-text">${q.text}</div>
+        <div class="q-hint">Seleccione la respuesta que mejor describe su reacción habitual:</div>
+        ${q.opts.map((o,i)=>`
+          <button class="choice-btn${answers[q.id]===o.s?' sel':''}"
+            onclick="pickChoice('${q.id}',${o.s},this)">
+            <span class="choice-letter">${'ABCD'[i]}.</span> ${o.t}
+          </button>`).join('')}`;
+    } else {
+      div.innerHTML = `
+        <div class="q-num">ÍTEM ${q.id.toUpperCase()}</div>
+        <div class="q-text">${q.text}</div>
+        <div class="q-hint">Escala: 1 = Nunca / Totalmente en desacuerdo · 5 = Siempre / Totalmente de acuerdo</div>
+        <div class="likert-row">
+          ${[1,2,3,4,5].map(n=>`
+            <button class="likert-btn${answers[q.id]===n?' sel':''}"
+              onclick="pickLikert('${q.id}',${n},${q.inv},this)">${n}</button>`).join('')}
+        </div>
+        <div class="likert-labels"><span>Nunca / Totalmente en desacuerdo</span><span>Siempre / De acuerdo</span></div>`;
+    }
+    qContainer.appendChild(div);
+  });
+}
+
+function pickLikert(qid, val, inv, btn){
+  const block = document.getElementById('qb-'+qid);
+  block.querySelectorAll('.likert-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  answers[qid] = inv ? 6-val : val;
+  block.classList.add('answered');
+  save(); updateProgress();
+}
+function pickChoice(qid, score, btn){
+  const block = document.getElementById('qb-'+qid);
+  block.querySelectorAll('.choice-btn').forEach(b=>b.classList.remove('sel'));
+  btn.classList.add('sel');
+  answers[qid] = score;
+  block.classList.add('answered');
+  save(); updateProgress();
+}
+
+function goTo(sec){
+  if(sec==='intro'){
+    document.getElementById('progress-bar-wrap').style.display='none';
+    document.getElementById('section-tabs').style.display='none';
+  }
+  showScreen(sec);
+}
+
+function nextSec(sec){
+  const qs = SEC_MAP[sec];
+  const missing = qs.filter(q=>answers[q.id]===undefined);
+  const vm = document.getElementById('val-'+sec);
+  if(missing.length){
+    vm.style.display='block';
+    document.getElementById('qb-'+missing[0].id).scrollIntoView({behavior:'smooth',block:'center'});
+    return;
+  }
+  vm.style.display='none';
+  const next = SEC_NEXT[sec];
+  if(next==='results') generateResults();
+  else showScreen(next);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CÁLCULOS
+// ═══════════════════════════════════════════════════════════════
+function calcAll(){
+  // IE
+  const ieDims={autoconciencia:[],autorregulacion:[],motivacion:[],empatia:[],social:[]};
+  IE_Q.forEach(q=>{if(answers[q.id]!==undefined)ieDims[q.dim].push(+answers[q.id]);});
+  const ie={};
+  Object.keys(ieDims).forEach(d=>{ie[d]=p100(avg(ieDims[d]));});
+  ie.total=Math.round(Object.values(ie).reduce((a,b)=>a+b,0)/5);
+
+  // Liderazgo
+  const lDims={transf:[],trans:[],laissez:[]};
+  LID_Q.forEach(q=>{if(answers[q.id]!==undefined)lDims[q.dim].push(+answers[q.id]);});
+  const lid={};
+  Object.keys(lDims).forEach(d=>{lid[d]=p100(avg(lDims[d]));});
+  if(lid.transf>=75&&lid.trans>=55)       lid.style='Liderazgo Óptimo (Transformacional + Transaccional)';
+  else if(lid.transf>=70)                  lid.style='Predominantemente Transformacional';
+  else if(lid.trans>=70&&lid.transf<55)    lid.style='Predominantemente Transaccional';
+  else if(lid.laissez>=65)                 lid.style='Correctivo / Laissez-Faire';
+  else                                     lid.style='Mixto / En Desarrollo';
+
+  // Temperamento
+  const tDims={sang:[],col:[],mel:[],flem:[]};
+  TEMP_Q.forEach(q=>{if(answers[q.id]!==undefined)tDims[q.dim].push(+answers[q.id]);});
+  const temp={};let dom='',maxV=0;
+  Object.keys(tDims).forEach(d=>{temp[d]=p100(avg(tDims[d]));if(temp[d]>maxV){maxV=temp[d];dom=d;}});
+  temp.dominant=dom;
+  const tempLabels={sang:'Sanguíneo',col:'Colérico',mel:'Melancólico',flem:'Flemático'};
+  temp.domLabel=tempLabels[dom]||dom;
+
+  // Perfil
+  const pDims={conflicto:[],decision:[],comunicacion:[],cambio:[],resultados:[]};
+  PERF_Q.forEach(q=>{if(answers[q.id]!==undefined)pDims[q.dim].push(+answers[q.id]);});
+  const perf={};
+  Object.keys(pDims).forEach(d=>{
+    const s=pDims[d].reduce((a,b)=>a+b,0);
+    perf[d]=pDims[d].length?Math.round((s/(pDims[d].length*5))*100):0;
+  });
+  perf.total=Math.round(Object.values(perf).reduce((a,b)=>a+b,0)/5);
+
+  const global=Math.round((ie.total+lid.transf+perf.total)/3);
+  return{ie,lid,temp,perf,global};
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER RESULTADOS
+// ═══════════════════════════════════════════════════════════════
+function generateResults(){
+  document.getElementById('loading-overlay').classList.add('show');
+  setTimeout(()=>{
+    document.getElementById('loading-overlay').classList.remove('show');
+    const R = calcAll();
+    window._R = R;
+
+    document.getElementById('r-nombre').textContent = candidate.nombre||'—';
+    document.getElementById('r-meta').textContent =
+      (candidate.institucion||'')+(candidate.fecha?' · '+candidate.fecha:'');
+
+    renderOverall(R);
+    renderIE(R.ie);
+    renderLid(R.lid);
+    renderTemp(R.temp);
+    renderPerf(R.perf);
+    renderConclusiones(R);
+
+    showScreen('results');
+    document.getElementById('progress-bar-wrap').style.display='none';
+    document.getElementById('section-tabs').style.display='none';
+  },1400);
+}
+
+function bar(pct,color,width='100%'){
+  return `<div class="score-bar-wrap">
+    <div class="score-bar-lbl"><span>PUNTUACIÓN</span><span>${pct}/100</span></div>
+    <div class="score-bar-outer" style="width:${width}">
+      <div class="score-bar-fill" style="width:${pct}%;background:${color}"></div>
+    </div></div>`;
+}
+
+function renderOverall(R){
+  const lv=lvl(R.global);
+  document.getElementById('r-overall').innerHTML=`
+  <div class="overall-card">
+    <h3>📊 Perfil Integral — Resumen Ejecutivo</h3>
+    <div class="scores-grid">
+      ${[
+        ['Inteligencia Emocional',R.ie.total,'#1e3a5f'],
+        ['Liderazgo Transformacional',R.lid.transf,'#6b1f2e'],
+        ['Liderazgo Transaccional',R.lid.trans,'#7a4020'],
+        ['Competencias Directivas',R.perf.total,'#4a2060'],
+      ].map(([lbl,val,c])=>`
+        <div class="score-tile">
+          <div class="score-tile-val">${val}%</div>
+          <div class="score-tile-lbl">${lbl}</div>
+          <div class="score-tile-lvl" style="color:${lvl(val).c}">${lvl(val).l}</div>
+        </div>`).join('')}
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:.9rem;margin-bottom:.8rem">
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:.55rem;color:#e8d5a0;letter-spacing:.1em;margin-bottom:.3rem">ESTILO DE LIDERAZGO PREDOMINANTE</div>
+      <div style="color:#fff;font-weight:600;font-size:1rem">${R.lid.style}</div>
+    </div>
+    <div style="background:rgba(255,255,255,.06);border-radius:4px;padding:.9rem;margin-bottom:1rem">
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:.55rem;color:#e8d5a0;letter-spacing:.1em;margin-bottom:.3rem">TEMPERAMENTO DOMINANTE</div>
+      <div style="color:#fff;font-size:1rem">${R.temp.domLabel}</div>
+    </div>
+    <div class="overall-analysis">
+      ${candidate.nombre||'La candidata'} presenta un perfil global de <strong style="color:#c8a84b">${R.global}%</strong>
+      (nivel: <strong style="color:${lv.c}">${lv.l}</strong>). Su estilo de liderazgo predominante es
+      <strong style="color:#c8a84b">${R.lid.style}</strong> con temperamento dominante
+      <strong style="color:#c8a84b">${R.temp.domLabel}</strong>.
+      ${R.global>=70?'El perfil general es favorable para el cargo de Coordinadora Institucional, con fortalezas destacadas en las dimensiones evaluadas.':
+        R.global>=50?'El perfil muestra potencial con áreas de desarrollo a considerar. Se recomienda entrevista profunda y evaluación complementaria.':
+        'Se identifican áreas de desarrollo relevantes que deben ponderarse cuidadosamente en el proceso de selección.'}
+    </div>
+  </div>`;
+}
+
+function renderIE(ie){
+  const dims=[
+    {k:'autoconciencia',l:'Autoconciencia Emocional',d:'Identificar con precisión las propias emociones y su influencia en la conducta directiva.'},
+    {k:'autorregulacion',l:'Autorregulación Emocional',d:'Gestión eficaz de respuestas emocionales propias ante presión o conflicto.'},
+    {k:'motivacion',l:'Motivación Intrínseca',d:'Orientación interna hacia el logro, el significado y la perseverancia institucional.'},
+    {k:'empatia',l:'Empatía',d:'Sensibilidad y comprensión del estado emocional de docentes, familias y estudiantes.'},
+    {k:'social',l:'Habilidades Sociales',d:'Gestión efectiva de relaciones interpersonales e influencia en el equipo.'},
+  ];
+  const lv=lvl(ie.total);
+  const recomIE=[];
+  if(ie.autoconciencia<60)recomIE.push('Fortalecer práctica reflexiva sobre estados emocionales mediante diario reflexivo o mindfulness institucional.');
+  if(ie.autorregulacion<60)recomIE.push('Desarrollar estrategias de regulación emocional ante situaciones de alta presión directiva.');
+  if(ie.empatia<60)recomIE.push('Potenciar la escucha activa y la lectura de necesidades en el equipo y la comunidad educativa.');
+  if(ie.social<60)recomIE.push('Reforzar habilidades de comunicación asertiva y manejo de dinámicas grupales.');
+  if(!recomIE.length)recomIE.push('Mantener y profundizar el nivel actual mediante práctica reflexiva continua y supervisión periódica.');
+
+  document.getElementById('r-ie').innerHTML=`
+  <div class="area-card">
+    <div class="area-card-head" style="background:#1e3a5f">
+      <div class="area-card-title">🧠 Inteligencia Emocional · MSCEIT / Bar-On</div>
+      <div class="area-card-score">${ie.total}% · ${lv.l}</div>
+    </div>
+    <div class="area-card-body">
+      ${bar(ie.total,'#1e3a5f')}
+      <div class="interp-box">
+        <strong style="color:${lv.c}">NIVEL: ${lv.l}</strong><br>
+        ${ie.total>=75?'Competencias emocionales muy bien desarrolladas. Alta capacidad para gestionar las propias emociones y responder empáticamente. Favorece climas institucionales positivos y manejo maduro de conflictos.':
+          ie.total>=55?'Nivel de IE por encima del promedio con fortalezas claras y áreas de desarrollo. Con acompañamiento puede potenciar sus competencias para el ejercicio directivo.':
+          'Nivel de IE dentro del promedio o inferior. Se identifican áreas de desarrollo importantes para el cargo. Se recomienda explorar en entrevista y considerar plan de desarrollo profesional.'}
+      </div>
+      <div class="dim-grid">
+        ${dims.map(d=>`
+          <div class="dim-item">
+            <div class="dim-lbl">${d.l}</div>
+            <div class="dim-val" style="color:${lvl(ie[d.k]).c}">${ie[d.k]}%</div>
+            <div class="dim-lvl" style="color:${lvl(ie[d.k]).c}">${lvl(ie[d.k]).l}</div>
+            <div class="score-bar-outer" style="margin-top:.4rem"><div class="score-bar-fill" style="width:${ie[d.k]}%;background:#1e3a5f"></div></div>
+            <div class="dim-desc">${d.d}</div>
+          </div>`).join('')}
+      </div>
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:.58rem;letter-spacing:.12em;color:var(--muted);margin:1rem 0 .4rem">RECOMENDACIONES PARA EL CARGO</div>
+      <ul class="recom-list">${recomIE.map(r=>`<li>${r}</li>`).join('')}</ul>
+    </div>
+  </div>`;
+}
+
+function renderLid(lid){
+  const lv=lvl(lid.transf);
+  const recom=[];
+  if(lid.laissez>55)recom.push('Desarrollar mayor proactividad en la intervención ante situaciones de conflicto o incumplimiento.');
+  if(lid.transf<60)recom.push('Fortalecer habilidades de comunicación de visión, motivación del equipo y acompañamiento individual.');
+  if(lid.trans<50)recom.push('Clarificar sistemas de expectativas, acuerdos y seguimiento con el equipo docente.');
+  if(!recom.length)recom.push('Mantener el balance actual y profundizar el desarrollo del liderazgo situacional según las necesidades del equipo.');
+
+  document.getElementById('r-liderazgo').innerHTML=`
+  <div class="area-card">
+    <div class="area-card-head" style="background:#6b1f2e">
+      <div class="area-card-title">🎯 Estilos de Liderazgo · MLQ Bass & Avolio</div>
+      <div class="area-card-score" style="font-size:.75rem">${lid.style}</div>
+    </div>
+    <div class="area-card-body">
+      <div class="interp-box">
+        <strong style="color:#6b1f2e">ESTILO PREDOMINANTE: ${lid.style.toUpperCase()}</strong><br>
+        ${lid.transf>=75&&lid.trans>=55?'Full Range Leadership (Bass & Avolio): combina inspiración transformacional con claridad transaccional. El patrón más eficaz para contextos educativos. Genera compromiso intrínseco y rendición de cuentas.':
+          lid.transf>=70?'Liderazgo transformacional predominante. Alta capacidad inspiradora. Se sugiere fortalecer competencias transaccionales para mayor equilibrio.':
+          lid.laissez>=65?'La tendencia laissez-faire puede representar un desafío para el cargo de coordinación. Se recomienda explorar en profundidad durante la entrevista.':
+          'Perfil de liderazgo en desarrollo. Se recomienda explorar experiencias directivas concretas en la entrevista.'}
+      </div>
+      ${[
+        ['Liderazgo Transformacional',lid.transf,'#6b1f2e'],
+        ['Liderazgo Transaccional',lid.trans,'#8b3a20'],
+        ['Tendencia Laissez-Faire (↓ mejor)',lid.laissez,'#9a7020'],
+      ].map(([l,v,c])=>`
+        <div style="margin-bottom:1rem">
+          <div style="display:flex;justify-content:space-between;font-family:'Josefin Sans',sans-serif;font-size:.58rem;color:var(--muted);margin-bottom:.25rem">
+            <span>${l}</span><span style="color:${lvl(v).c};font-weight:600">${v}% · ${lvl(v).l}</span>
+          </div>
+          <div class="score-bar-outer"><div class="score-bar-fill" style="width:${v}%;background:${c}"></div></div>
+        </div>`).join('')}
+      <div style="font-family:'Josefin Sans',sans-serif;font-size:.58rem;letter-spacing:.12em;color:var(--muted);margin:1rem 0 .4rem">IMPLICACIONES PARA EL CARGO</div>
+      <ul class="recom-list">${recom.map(r=>`<li>${r}</li>`).join('')}</ul>
+    </div>
+  </div>`;
+}
+
+function renderTemp(temp){
+  const tInfo={
+    sang:{l:'Sanguíneo',c:'#e67e22',fort:'Comunicación · Adaptabilidad · Creatividad · Motivar equipos',des:'Consistencia · Organización · Priorización'},
+    col:{l:'Colérico',c:'#c0392b',fort:'Toma de decisiones · Iniciativa · Orientación a resultados',des:'Escucha activa · Paciencia · Trabajo colaborativo'},
+    mel:{l:'Melancólico',c:'#2980b9',fort:'Análisis crítico · Planificación · Calidad · Responsabilidad',des:'Flexibilidad · Velocidad de decisión · Autocrítica'},
+    flem:{l:'Flemático',c:'#27ae60',fort:'Estabilidad emocional · Mediación · Escucha · Consistencia',des:'Iniciativa · Gestión del cambio · Asertividad'},
+  };
+  const dom = tInfo[temp.dominant]||tInfo.sang;
+
+  document.getElementById('r-temperamento').innerHTML=`
+  <div class="area-card">
+    <div class="area-card-head" style="background:#2d5a3d">
+      <div class="area-card-title">🌡️ Temperamento · Cloninger / Keirsey</div>
+      <div class="area-card-score">${temp.domLabel} · ${lvl(temp[temp.dominant]||60).l}</div>
+    </div>
+    <div class="area-card-body">
+      <div class="interp-box"><strong style="color:#2d5a3d">TEMPERAMENTO DOMINANTE: ${temp.domLabel.toUpperCase()}</strong><br>
+        ${temp.dominant==='sang'?'Persona naturalmente extrovertida, adaptable y orientada a las relaciones. Facilita la comunicación con la comunidad, la motivación del equipo y la generación de ambientes positivos.':
+          temp.dominant==='col'?'Persona orientada al logro, decisiva y con alta iniciativa. Valiosa para decisiones rápidas y orientación a resultados. Reto en gestión relacional y paciencia ante procesos graduales.':
+          temp.dominant==='mel'?'Persona analítica, perfeccionista y con altos estándares de calidad. Valiosa para planificación y garantía de calidad. Reto en flexibilidad y velocidad de decisión.':
+          'Persona de gran estabilidad emocional, paciencia y capacidad de mediación. Valiosa para la gestión del clima institucional. Reto en iniciativa y urgencia en situaciones de crisis.'}
+      </div>
+      ${Object.keys(tInfo).map(k=>`
+        <div style="margin-bottom:.9rem">
+          <div style="display:flex;justify-content:space-between;font-family:'Josefin Sans',sans-serif;font-size:.6rem;margin-bottom:.25rem">
+            <span style="color:${k===temp.dominant?tInfo[k].c:'var(--muted)'};font-weight:${k===temp.dominant?700:400}">${k===temp.dominant?'★ ':''} ${tInfo[k].l}</span>
+            <span style="color:${lvl(temp[k]||0).c};font-weight:600">${temp[k]||0}% · ${lvl(temp[k]||0).l}</span>
+          </div>
+          <div class="score-bar-outer"><div class="score-bar-fill" style="width:${temp[k]||0}%;background:${tInfo[k].c}"></div></div>
+        </div>`).join('')}
+      <div class="dim-grid" style="margin-top:1rem">
+        <div class="dim-item">
+          <div class="dim-lbl" style="color:var(--sage)">FORTALEZAS NATURALES</div>
+          <div style="font-size:.88rem;color:var(--ink);margin-top:.3rem;line-height:1.5">${dom.fort}</div>
+        </div>
+        <div class="dim-item" style="background:#fffbf0">
+          <div class="dim-lbl" style="color:#9a6800">ÁREAS DE DESARROLLO</div>
+          <div style="font-size:.88rem;color:var(--ink);margin-top:.3rem;line-height:1.5">${dom.des}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderPerf(perf){
+  const dims=[
+    {k:'conflicto',l:'Gestión del Conflicto',d:'Mediación e intervención oportuna en conflictos institucionales.'},
+    {k:'decision',l:'Toma de Decisiones',d:'Criterio directivo bajo presión e imprevistos institucionales.'},
+    {k:'comunicacion',l:'Comunicación Institucional',d:'Transmitir información difícil y dar retroalimentación constructiva.'},
+    {k:'cambio',l:'Gestión del Cambio',d:'Liderar transformaciones y gestionar la resistencia organizacional.'},
+    {k:'resultados',l:'Orientación a Resultados',d:'Análisis de datos y gestión estratégica orientada al aprendizaje.'},
+  ];
+  const lv=lvl(perf.total);
+  document.getElementById('r-perfil').innerHTML=`
+  <div class="area-card">
+    <div class="area-card-head" style="background:#4a2060">
+      <div class="area-card-title">📋 Competencias Directivas · SJT</div>
+      <div class="area-card-score">${perf.total}% · ${lv.l}</div>
+    </div>
+    <div class="area-card-body">
+      ${bar(perf.total,'#4a2060')}
+      <div class="interp-box">
+        ${perf.total>=80?'Perfil de competencias directivas sólido y bien integrado. Las respuestas revelan criterios de actuación maduros, estratégicos y orientados tanto a los resultados como al bienestar del equipo.':
+          perf.total>=60?'Competencias directivas en desarrollo con fortalezas en algunas áreas. Perfil con capacidad de aprendizaje en el cargo con acompañamiento adecuado.':
+          'Perfil de competencias que evidencia áreas de desarrollo significativas. Se recomienda explorar en profundidad durante la entrevista.'}
+      </div>
+      <div class="dim-grid">
+        ${dims.map(d=>`
+          <div class="dim-item">
+            <div class="dim-lbl">${d.l}</div>
+            <div class="dim-val" style="color:${lvl(perf[d.k]).c}">${perf[d.k]}%</div>
+            <div class="dim-lvl" style="color:${lvl(perf[d.k]).c}">${lvl(perf[d.k]).l}</div>
+            <div class="score-bar-outer" style="margin-top:.4rem"><div class="score-bar-fill" style="width:${perf[d.k]}%;background:#4a2060"></div></div>
+            <div class="dim-desc">${d.d}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderConclusiones(R){
+  document.getElementById('r-conclusiones').innerHTML=`
+  <div class="area-card" style="border:2px solid var(--gold)">
+    <div class="area-card-head" style="background:var(--ink)">
+      <div class="area-card-title">📝 Conclusiones y Recomendación de Selección</div>
+    </div>
+    <div class="area-card-body">
+      <table style="width:100%;border-collapse:collapse;margin-bottom:1.2rem;font-size:.88rem">
+        <tr style="background:var(--ink)">
+          <th style="padding:.6rem .8rem;text-align:left;color:var(--gold);font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.1em">ÁREA</th>
+          <th style="padding:.6rem .8rem;text-align:center;color:var(--gold);font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.1em">PUNTUACIÓN</th>
+          <th style="padding:.6rem .8rem;text-align:center;color:var(--gold);font-family:'Josefin Sans',sans-serif;font-size:.55rem;letter-spacing:.1em">NIVEL</th>
+        </tr>
+        ${[
+          ['Inteligencia Emocional',R.ie.total],
+          ['Liderazgo Transformacional',R.lid.transf],
+          ['Liderazgo Transaccional',R.lid.trans],
+          ['Tendencia Laissez-Faire (↓mejor)',R.lid.laissez],
+          ['Temperamento Dominante — '+R.temp.domLabel,null],
+          ['Competencias Directivas SJT',R.perf.total],
+        ].map(([l,v],i)=>`
+          <tr style="background:${i%2===0?'var(--cream)':'white'}">
+            <td style="padding:.55rem .8rem;color:var(--ink)">${l}</td>
+            <td style="padding:.55rem .8rem;text-align:center;font-weight:700;color:${v!==null?lvl(v).c:'var(--muted)'}">${v!==null?v+'%':'—'}</td>
+            <td style="padding:.55rem .8rem;text-align:center;font-size:.82rem;color:${v!==null?lvl(v).c:'var(--muted)'}">${v!==null?lvl(v).l:'—'}</td>
+          </tr>`).join('')}
+      </table>
+
+      <div class="interp-box">
+        <strong>Análisis conclusivo integrado:</strong><br>
+        ${candidate.nombre||'La candidata'} presenta un perfil psicológico de nivel <strong>${lvl(R.global).l}</strong>
+        (puntuación global: <strong>${R.global}%</strong>) para el cargo de Coordinadora Institucional.
+        Su estilo de liderazgo <strong>${R.lid.style}</strong> y temperamento dominante <strong>${R.temp.domLabel}</strong>
+        configuran un perfil directivo
+        ${R.global>=70?'altamente favorable para el cargo, con fortalezas sobresalientes en las dimensiones clave evaluadas.':
+          R.global>=50?'con potencial para el cargo, con áreas de desarrollo a acompañar mediante plan de inducción y supervisión.':
+          'que requiere evaluación adicional antes de una recomendación definitiva. Se sugiere entrevista profunda.'}
+      </div>
+
+      <div class="obs-box">
+        <div class="obs-title">✏ OBSERVACIONES DE LA LICDA. LOURDES MONTERROSO</div>
+        <div class="obs-line"></div><div class="obs-line"></div><div class="obs-line"></div>
+        <div class="obs-line"></div><div class="obs-line"></div>
+        <div class="obs-title" style="margin-top:1rem">RECOMENDACIÓN FINAL</div>
+        <div class="verdict-row">
+          <div class="verdict-item"><div class="verdict-check"></div>✅ APTO/A — Contratar</div>
+          <div class="verdict-item"><div class="verdict-check"></div>⚠ APTO/A CON RESERVAS</div>
+          <div class="verdict-item"><div class="verdict-check"></div>❌ NO APTO/A</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// START
+// ═══════════════════════════════════════════════════════════════
+function startTest(){
+  candidate = {
+    nombre:      document.getElementById('f-nombre').value||'No especificado',
+    edad:        document.getElementById('f-edad').value||'—',
+    formacion:   document.getElementById('f-form').value||'—',
+    experiencia: document.getElementById('f-exp').value||'—',
+    area:        document.getElementById('f-area').value||'—',
+    institucion: document.getElementById('f-inst').value||'—',
+    fecha:       document.getElementById('f-fecha').value||new Date().toLocaleDateString('es'),
+  };
+  save();
+  ['ie','liderazgo','temperamento','perfil'].forEach(renderSection);
+  document.getElementById('progress-bar-wrap').style.display='flex';
+  document.getElementById('section-tabs').style.display='flex';
+  showScreen('ie');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EXPORT WORD
+// ═══════════════════════════════════════════════════════════════
+async function exportWord(){
+  const btn = document.getElementById('btn-word');
+  btn.textContent='⏳ Generando...';btn.disabled=true;
+  try{
+    const R = window._R;
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('es',{year:'numeric',month:'long',day:'numeric'});
+    const fname = candidate.nombre.replace(/\s+/g,'_');
+
+    const {
+      Document,Packer,Paragraph,TextRun,Table,TableRow,TableCell,
+      Header,Footer,AlignmentType,BorderStyle,WidthType,ShadingType,
+      VerticalAlign,HeadingLevel
+    } = docx;
+
+    const GOLD='C8A84B',INK='0E1520',CREAM='F9F6EF',LIGHT='EDE8D8',
+          STEEL='1E3A5F',BURG='6B1F2E',SAGE='2D5A3D',PLUM='4A2060',
+          MUTED='6B6B7A',WHITE='FFFFFF',GOLD2='E8D5A0',
+          STEEL_L='DDE6F0',BURG_L='F5E8EB',SAGE_L='E2EDE5',PLUM_L='EDE0F5';
+
+    const nb={style:BorderStyle.NONE,size:0,color:'FFFFFF'};
+    const nob={top:nb,bottom:nb,left:nb,right:nb};
+    const bord=(c='D8D0BB')=>({
+      top:{style:BorderStyle.SINGLE,size:1,color:c},
+      bottom:{style:BorderStyle.SINGLE,size:1,color:c},
+      left:{style:BorderStyle.SINGLE,size:1,color:c},
+      right:{style:BorderStyle.SINGLE,size:1,color:c},
+    });
+    const pad={top:100,bottom:100,left:140,right:140};
+    const padSm={top:80,bottom:80,left:120,right:120};
+
+    const sp=(n=80)=>new Paragraph({spacing:{before:n,after:0},children:[]});
+    const div=(c=GOLD)=>new Paragraph({
+      border:{bottom:{style:BorderStyle.SINGLE,size:10,color:c}},
+      spacing:{before:80,after:80},children:[],
+    });
+
+    function lvlW(p){
+      return p>=85?'MUY ALTO':p>=70?'ALTO':p>=55?'MEDIO-ALTO':p>=40?'MEDIO':p>=25?'MEDIO-BAJO':'BAJO';
+    }
+    function clrW(p){
+      return p>=85?'2D6A4F':p>=70?'40916C':p>=55?'5A8F78':p>=40?'B8860B':p>=25?'D4622A':'C0392B';
+    }
+
+    function barW(pct,color,w=80){
+      const f=Math.round((pct/100)*w);
+      const e=w-f;
+      return new Paragraph({spacing:{before:20,after:30},children:[
+        new TextRun({text:'█'.repeat(f),color,size:13,font:'Courier New'}),
+        new TextRun({text:'░'.repeat(e),color:'D8D0BB',size:13,font:'Courier New'}),
+        new TextRun({text:`  ${pct}%`,color,bold:true,size:18,font:'Arial'}),
+      ]});
+    }
+
+    function hCell(text,fill,w,tc=WHITE,fs=19){
+      return new TableCell({width:{size:w,type:WidthType.DXA},shading:{fill,type:ShadingType.CLEAR},
+        margins:pad,borders:bord(fill),verticalAlign:VerticalAlign.CENTER,
+        children:[new Paragraph({alignment:AlignmentType.CENTER,
+          children:[new TextRun({text,color:tc,bold:true,size:fs,font:'Arial'})]})]});
+    }
+    function dCell(text,w,fill=WHITE,bold=false,color=INK,align=AlignmentType.LEFT,size=20){
+      return new TableCell({width:{size:w,type:WidthType.DXA},shading:{fill,type:ShadingType.CLEAR},
+        margins:padSm,borders:bord(),
+        children:[new Paragraph({alignment:align,
+          children:[new TextRun({text,color,bold,size,font:'Arial'})]})]});
+    }
+
+    // ── PORTADA ──
+    const portada=[
+      sp(200),
+      new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'CLÍNICA CUIDANDO TU SALUD MENTAL',color:GOLD,bold:true,size:28,font:'Arial'})]}),
+      new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Licda. Lourdes Monterroso · Psicóloga Industrial y Organizacional',color:INK,size:20,font:'Arial'})]}),
+      sp(60),div(),sp(40),
+      new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'INFORME PSICOLÓGICO INTEGRAL',color:MUTED,size:18,allCaps:true,font:'Arial',characterSpacing:80})]}),
+      sp(20),
+      new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Batería de Evaluación para Selección de Personal Directivo',color:INK,bold:true,size:36,font:'Arial'})]}),
+      sp(10),
+      new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Cargo: Coordinadora Institucional',color:MUTED,size:22,italics:true,font:'Arial'})]}),
+      sp(120),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[2800,6200],rows:[
+        new TableRow({children:[new TableCell({width:{size:9000,type:WidthType.DXA},columnSpan:2,
+          shading:{fill:INK,type:ShadingType.CLEAR},margins:pad,borders:bord(INK),
+          children:[new Paragraph({alignment:AlignmentType.CENTER,children:[
+            new TextRun({text:'DATOS DE LA CANDIDATA',color:GOLD,bold:true,size:20,font:'Arial',allCaps:true})
+          ]})]})]}),
+        ...[
+          ['NOMBRE COMPLETO',candidate.nombre],
+          ['EDAD',candidate.edad+' años'],
+          ['FORMACIÓN ACADÉMICA',candidate.formacion],
+          ['ÁREA DE FORMACIÓN',candidate.area],
+          ['EXPERIENCIA DIRECTIVA',candidate.experiencia+' años'],
+          ['INSTITUCIÓN APLICANTE',candidate.institucion],
+          ['FECHA DE EVALUACIÓN',candidate.fecha],
+        ].map(([l,v])=>new TableRow({children:[
+          dCell(l,2800,LIGHT,true,MUTED,AlignmentType.LEFT,18),
+          dCell(v,6200,WHITE,false,INK,AlignmentType.LEFT,20),
+        ]})),
+      ]}),
+      sp(120),
+      new Paragraph({alignment:AlignmentType.CENTER,
+        border:{top:{style:BorderStyle.SINGLE,size:4,color:GOLD}},
+        spacing:{before:60,after:0},
+        children:[new TextRun({text:'DOCUMENTO CONFIDENCIAL — Uso exclusivo del área de Recursos Humanos',color:MUTED,size:16,italics:true,font:'Arial'})]}),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── RESUMEN EJECUTIVO ──
+    const lv=lvlW(R.global);const lvc=clrW(R.global);
+    const resumen=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'1. PERFIL INTEGRAL — RESUMEN EJECUTIVO',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(GOLD),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[2250,2250,2250,2250],rows:[
+        new TableRow({children:[hCell('INTELIGENCIA\nEMOCIONAL',STEEL,2250),hCell('LIDERAZGO\nTRANSFORMACIONAL',BURG,2250),hCell('LIDERAZGO\nTRANSACCIONAL','7A4020',2250),hCell('COMPETENCIAS\nDIRECTIVAS',PLUM,2250)]}),
+        new TableRow({children:[[R.ie.total,STEEL],[R.lid.transf,BURG],[R.lid.trans,'7A4020'],[R.perf.total,PLUM]].map(([v,c])=>
+          new TableCell({width:{size:2250,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:pad,borders:bord(),verticalAlign:VerticalAlign.CENTER,
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${v}%`,color:c,bold:true,size:48,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(v),color:clrW(v),bold:true,size:16,font:'Arial'})]}),
+            ]})
+        )}),
+      ]}),
+      sp(100),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[4500,4500],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:INK,type:ShadingType.CLEAR},margins:pad,borders:bord(INK),
+            children:[
+              new Paragraph({children:[new TextRun({text:'ESTILO DE LIDERAZGO PREDOMINANTE',color:GOLD,bold:true,size:16,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:60},children:[new TextRun({text:R.lid.style,color:WHITE,bold:true,size:20,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:INK,type:ShadingType.CLEAR},margins:pad,borders:bord(INK),
+            children:[
+              new Paragraph({children:[new TextRun({text:'TEMPERAMENTO DOMINANTE',color:GOLD,bold:true,size:16,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:60},children:[new TextRun({text:R.temp.domLabel,color:WHITE,bold:true,size:20,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(100),
+      new Paragraph({shading:{fill:LIGHT,type:ShadingType.CLEAR},border:{left:{style:BorderStyle.SINGLE,size:20,color:GOLD}},
+        indent:{left:200},spacing:{before:60,after:120},
+        children:[
+          new TextRun({text:`${candidate.nombre} presenta un perfil global de `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`${R.global}% (nivel: ${lv})`,color:lvc,bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`. Estilo de liderazgo predominante: `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:R.lid.style,color:BURG,bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`. Temperamento dominante: `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:R.temp.domLabel,color:'C07830',bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`. ${R.global>=70?'El perfil general es altamente favorable para el cargo de Coordinadora Institucional, con fortalezas destacadas en todas las dimensiones evaluadas.':'El perfil muestra potencial con áreas de desarrollo a considerar. Se recomienda entrevista profunda y evaluación complementaria.'}`,color:INK,size:21,italics:true,font:'Arial'}),
+        ]}),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── SECCIÓN IE ──
+    const secIE=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'2. INTELIGENCIA EMOCIONAL',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(STEEL),
+      new Paragraph({children:[new TextRun({text:'Marco teórico: MSCEIT (Mayer, Salovey & Caruso, 2002) + EQ-i (Bar-On). Evalúa 5 dimensiones nucleares para el ejercicio directivo educativo.',color:MUTED,size:18,italics:true,font:'Arial'})]}),
+      sp(80),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[6000,3000],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:6000,type:WidthType.DXA},shading:{fill:STEEL_L,type:ShadingType.CLEAR},margins:pad,borders:bord(STEEL),
+            children:[
+              new Paragraph({children:[new TextRun({text:'PUNTUACIÓN GLOBAL IE',color:STEEL,bold:true,size:18,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:40},children:[new TextRun({text:R.ie.total>=75?'Competencias emocionales muy bien desarrolladas. Alta capacidad para gestionar las propias emociones y responder empáticamente.':R.ie.total>=55?'Competencias emocionales sobre el promedio. Fortalezas claras con áreas de desarrollo identificadas.':'Áreas de desarrollo importantes para el ejercicio del cargo directivo.',color:INK,size:20,italics:true,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:STEEL,type:ShadingType.CLEAR},margins:pad,borders:bord(STEEL),verticalAlign:VerticalAlign.CENTER,
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${R.ie.total}%`,color:GOLD,bold:true,size:64,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(R.ie.total),color:WHITE,bold:true,size:18,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(80),
+      ...[
+        ['Autoconciencia Emocional',R.ie.autoconciencia,'Capacidad de identificar con precisión las propias emociones y su influencia directiva.'],
+        ['Autorregulación Emocional',R.ie.autorregulacion,'Gestión eficaz de respuestas emocionales propias ante presión o conflicto.'],
+        ['Motivación Intrínseca',R.ie.motivacion,'Orientación interna hacia el logro, el significado y la perseverancia institucional.'],
+        ['Empatía',R.ie.empatia,'Sensibilidad y comprensión del estado emocional de docentes, familias y estudiantes.'],
+        ['Habilidades Sociales',R.ie.social,'Gestión efectiva de relaciones interpersonales e influencia en el equipo.'],
+      ].flatMap(([l,v,d])=>[
+        new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[3000,4400,1600],rows:[
+          new TableRow({children:[
+            new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),children:[new Paragraph({children:[new TextRun({text:l,color:INK,bold:true,size:20,font:'Arial'})]})] }),
+            new TableCell({width:{size:4400,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,children:[barW(v,STEEL,52)]}),
+            new TableCell({width:{size:1600,type:WidthType.DXA},shading:{fill:STEEL_L,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,
+              children:[
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${v}%`,color:STEEL,bold:true,size:24,font:'Arial'})]}),
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(v),color:clrW(v),size:15,font:'Arial'})]}),
+              ]}),
+          ]}),
+        ]}),
+        new Paragraph({spacing:{before:20,after:0},indent:{left:100},children:[new TextRun({text:d,color:MUTED,size:18,italics:true,font:'Arial'})]}),
+        sp(40),
+      ]),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── SECCIÓN LIDERAZGO ──
+    const secLid=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'3. ESTILOS DE LIDERAZGO',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(BURG),
+      new Paragraph({children:[new TextRun({text:'Marco teórico: MLQ-5X de Bass & Avolio (1990). Evalúa el espectro completo del liderazgo directivo en organizaciones educativas.',color:MUTED,size:18,italics:true,font:'Arial'})]}),
+      sp(80),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[6000,3000],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:6000,type:WidthType.DXA},shading:{fill:BURG_L,type:ShadingType.CLEAR},margins:pad,borders:bord(BURG),
+            children:[
+              new Paragraph({children:[new TextRun({text:'ESTILO PREDOMINANTE',color:BURG,bold:true,size:18,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:40},children:[new TextRun({text:R.lid.style,color:INK,bold:true,size:22,font:'Arial'})]}),
+              new Paragraph({spacing:{before:60},children:[new TextRun({text:R.lid.transf>=75&&R.lid.trans>=55?'Full Range Leadership: combina inspiración transformacional con claridad transaccional. El patrón más eficaz para contextos educativos. Genera compromiso intrínseco y rendición de cuentas simultáneamente.':R.lid.transf>=70?'Liderazgo transformacional predominante. Alta capacidad inspiradora. Se sugiere fortalecer competencias transaccionales.':'Perfil de liderazgo en desarrollo. Se recomienda explorar experiencias directivas en la entrevista.',color:INK,size:19,italics:true,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:BURG,type:ShadingType.CLEAR},margins:pad,borders:bord(BURG),verticalAlign:VerticalAlign.CENTER,
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'ÓPTIMO',color:GOLD,bold:true,size:32,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,spacing:{before:20},children:[new TextRun({text:'Full Range\nLeadership',color:WHITE,size:18,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(100),
+      ...[
+        ['Liderazgo Transformacional',R.lid.transf,BURG,'Inspiración, visión, desarrollo individual, coherencia de valores y motivación intrínseca.'],
+        ['Liderazgo Transaccional',R.lid.trans,'7A4020','Claridad de expectativas, seguimiento, reconocimiento concreto y consecuencias definidas.'],
+        ['Tendencia Laissez-Faire (↓ favorable)',R.lid.laissez,'9A7020','Puntuación baja es favorable. Indica presencia activa e intervención oportuna.'],
+      ].flatMap(([l,v,c,d])=>[
+        new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[3400,4000,1600],rows:[
+          new TableRow({children:[
+            new TableCell({width:{size:3400,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),children:[new Paragraph({children:[new TextRun({text:l,color:INK,bold:true,size:19,font:'Arial'})]})] }),
+            new TableCell({width:{size:4000,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,children:[barW(v,c,46)]}),
+            new TableCell({width:{size:1600,type:WidthType.DXA},shading:{fill:BURG_L,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,
+              children:[
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${v}%`,color:c,bold:true,size:24,font:'Arial'})]}),
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(v),color:clrW(v),size:15,font:'Arial'})]}),
+              ]}),
+          ]}),
+        ]}),
+        new Paragraph({spacing:{before:20,after:0},indent:{left:100},children:[new TextRun({text:d,color:MUTED,size:18,italics:true,font:'Arial'})]}),
+        sp(40),
+      ]),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── SECCIÓN TEMPERAMENTO ──
+    const tInfo2={sang:{l:'Sanguíneo',c:'E67E22',f:'Comunicación interpersonal, adaptabilidad, creatividad, motivación de equipos, conexión empática.',ds:'Consistencia en seguimiento, organización, priorización de proyectos múltiples.'},col:{l:'Colérico',c:'C0392B',f:'Toma de decisiones, iniciativa, orientación a resultados, determinación.',ds:'Escucha activa, paciencia, trabajo colaborativo, gestión de frustración.'},mel:{l:'Melancólico',c:'2980B9',f:'Análisis crítico, planificación, altos estándares de calidad, responsabilidad.',ds:'Flexibilidad, velocidad de decisión, autocrítica excesiva.'},flem:{l:'Flemático',c:'27AE60',f:'Estabilidad emocional, mediación, escucha activa, consistencia en procesos.',ds:'Iniciativa, gestión del cambio, asertividad directiva en crisis.'}};
+    const domT=tInfo2[R.temp.dominant]||tInfo2.sang;
+    const secTemp=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'4. TEMPERAMENTO Y CARÁCTER',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(SAGE),
+      new Paragraph({children:[new TextRun({text:'Marco teórico: TCI-R de Cloninger (1994) + Tipología de Keirsey (1998). Evalúa patrones automáticos de respuesta emocional y conductual de base biológica.',color:MUTED,size:18,italics:true,font:'Arial'})]}),
+      sp(80),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[6000,3000],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:6000,type:WidthType.DXA},shading:{fill:SAGE_L,type:ShadingType.CLEAR},margins:pad,borders:bord(SAGE),
+            children:[
+              new Paragraph({children:[new TextRun({text:'TEMPERAMENTO DOMINANTE',color:SAGE,bold:true,size:18,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:40},children:[new TextRun({text:R.temp.domLabel,color:INK,bold:true,size:22,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:SAGE,type:ShadingType.CLEAR},margins:pad,borders:bord(SAGE),verticalAlign:VerticalAlign.CENTER,
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'★',color:GOLD,size:48,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:R.temp.domLabel,color:WHITE,bold:true,size:26,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(100),
+      ...Object.keys(tInfo2).flatMap(k=>[
+        new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[2600,4600,1800],rows:[
+          new TableRow({children:[
+            new TableCell({width:{size:2600,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),children:[new Paragraph({children:[new TextRun({text:(k===R.temp.dominant?'★ ':'')+tInfo2[k].l,color:INK,bold:k===R.temp.dominant,size:20,font:'Arial'})]})] }),
+            new TableCell({width:{size:4600,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,children:[barW(R.temp[k]||0,tInfo2[k].c,54)]}),
+            new TableCell({width:{size:1800,type:WidthType.DXA},shading:{fill:SAGE_L,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,
+              children:[
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${R.temp[k]||0}%`,color:tInfo2[k].c,bold:true,size:24,font:'Arial'})]}),
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(R.temp[k]||0),color:clrW(R.temp[k]||0),size:15,font:'Arial'})]}),
+              ]}),
+          ]}),
+        ]}),
+        sp(40),
+      ]),
+      sp(60),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[4500,4500],rows:[
+        new TableRow({children:[hCell('FORTALEZAS NATURALES PARA EL CARGO',SAGE,4500),hCell('ÁREAS DE DESARROLLO A CONSIDERAR','9A6800',4500)]}),
+        new TableRow({children:[
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:SAGE_L,type:ShadingType.CLEAR},margins:pad,borders:bord(SAGE),
+            children:domT.f.split(',').map(f=>new Paragraph({spacing:{before:20},children:[new TextRun({text:`▸ ${f.trim()}`,color:SAGE,size:20,font:'Arial'})]}))}),
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:'FFFBF0',type:ShadingType.CLEAR},margins:pad,borders:bord('D4A800'),
+            children:domT.ds.split(',').map(f=>new Paragraph({spacing:{before:20},children:[new TextRun({text:`▸ ${f.trim()}`,color:'9A6800',size:20,font:'Arial'})]}))}),
+        ]}),
+      ]}),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── SECCIÓN COMPETENCIAS ──
+    const secPerf=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'5. COMPETENCIAS DIRECTIVAS (SJT)',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(PLUM),
+      new Paragraph({children:[new TextRun({text:'Marco teórico: Situational Judgment Test adaptado para cargos directivos educativos. Alta validez predictiva (McDaniel et al., 2007).',color:MUTED,size:18,italics:true,font:'Arial'})]}),
+      sp(80),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[6000,3000],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:6000,type:WidthType.DXA},shading:{fill:PLUM_L,type:ShadingType.CLEAR},margins:pad,borders:bord(PLUM),
+            children:[
+              new Paragraph({children:[new TextRun({text:'PUNTUACIÓN GLOBAL COMPETENCIAS DIRECTIVAS',color:PLUM,bold:true,size:18,font:'Arial',allCaps:true})]}),
+              new Paragraph({spacing:{before:40},children:[new TextRun({text:R.perf.total>=80?'Perfil sólido y bien integrado. Criterios maduros y estratégicos.':R.perf.total>=60?'Competencias en desarrollo con fortalezas identificadas.':'Áreas de desarrollo significativas. Se recomienda entrevista adicional.',color:INK,size:20,italics:true,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:PLUM,type:ShadingType.CLEAR},margins:pad,borders:bord(PLUM),verticalAlign:VerticalAlign.CENTER,
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${R.perf.total}%`,color:GOLD,bold:true,size:64,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(R.perf.total),color:WHITE,bold:true,size:18,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(80),
+      ...[
+        ['Gestión del Conflicto',R.perf.conflicto,'Mediación e intervención oportuna en conflictos institucionales.'],
+        ['Toma de Decisiones bajo Presión',R.perf.decision,'Criterio directivo para actuar con eficacia ante imprevistos de alta exigencia.'],
+        ['Comunicación Institucional Efectiva',R.perf.comunicacion,'Transmitir información difícil y dar retroalimentación constructiva en contextos de tensión.'],
+        ['Gestión del Cambio Organizacional',R.perf.cambio,'Liderar transformaciones y gestionar la resistencia organizacional.'],
+        ['Orientación a Resultados Educativos',R.perf.resultados,'Análisis de datos y gestión estratégica orientada al impacto en el aprendizaje.'],
+      ].flatMap(([l,v,d])=>[
+        new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[3200,4200,1600],rows:[
+          new TableRow({children:[
+            new TableCell({width:{size:3200,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),children:[new Paragraph({children:[new TextRun({text:l,color:INK,bold:true,size:19,font:'Arial'})]})] }),
+            new TableCell({width:{size:4200,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,children:[barW(v,PLUM,50)]}),
+            new TableCell({width:{size:1600,type:WidthType.DXA},shading:{fill:PLUM_L,type:ShadingType.CLEAR},margins:padSm,borders:bord(),verticalAlign:VerticalAlign.CENTER,
+              children:[
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:`${v}%`,color:PLUM,bold:true,size:24,font:'Arial'})]}),
+                new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:lvlW(v),color:clrW(v),size:15,font:'Arial'})]}),
+              ]}),
+          ]}),
+        ]}),
+        new Paragraph({spacing:{before:20,after:0},indent:{left:100},children:[new TextRun({text:d,color:MUTED,size:18,italics:true,font:'Arial'})]}),
+        sp(40),
+      ]),
+      new Paragraph({pageBreakBefore:true,children:[]}),
+    ];
+
+    // ── CONCLUSIONES ──
+    const secConc=[
+      new Paragraph({heading:HeadingLevel.HEADING_1,children:[new TextRun({text:'6. CONCLUSIONES Y RECOMENDACIÓN DE SELECCIÓN',color:INK,bold:true,size:28,font:'Arial'})]}),
+      div(GOLD),sp(80),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[3600,2000,1800,1600],rows:[
+        new TableRow({children:[hCell('ÁREA EVALUADA',INK,3600,GOLD,18),hCell('PUNTUACIÓN',INK,2000,GOLD,18),hCell('NIVEL',INK,1800,GOLD,18),hCell('RELEVANCIA',INK,1600,GOLD,18)]}),
+        ...[
+          ['Inteligencia Emocional',R.ie.total,'Muy Alta'],
+          ['Liderazgo Transformacional',R.lid.transf,'Muy Alta'],
+          ['Liderazgo Transaccional',R.lid.trans,'Alta'],
+          ['Laissez-Faire (↓mejor)',R.lid.laissez,'Alta'],
+          ['Temperamento — '+R.temp.domLabel,null,'Media-Alta'],
+          ['Competencias Directivas SJT',R.perf.total,'Muy Alta'],
+        ].map(([l,v,rel],i)=>new TableRow({children:[
+          dCell(l,3600,i%2===0?WHITE:LIGHT,false,INK,AlignmentType.LEFT,19),
+          dCell(v!==null?`${v}%`:'—',2000,i%2===0?WHITE:LIGHT,true,v!==null?clrW(v):MUTED,AlignmentType.CENTER,20),
+          dCell(v!==null?lvlW(v):'—',1800,i%2===0?WHITE:LIGHT,false,v!==null?clrW(v):MUTED,AlignmentType.CENTER,18),
+          dCell(rel,1600,i%2===0?WHITE:LIGHT,false,MUTED,AlignmentType.CENTER,17),
+        ]})),
+      ]}),
+      sp(120),
+      new Paragraph({shading:{fill:LIGHT,type:ShadingType.CLEAR},border:{left:{style:BorderStyle.SINGLE,size:20,color:GOLD}},
+        indent:{left:200},spacing:{before:60,after:120},
+        children:[
+          new TextRun({text:`${candidate.nombre} presenta un perfil psicológico de nivel `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`${lv} (${R.global}%)`,color:lvc,bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:` para el cargo de Coordinadora Institucional. Estilo de liderazgo: `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:R.lid.style,color:BURG,bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`. Temperamento dominante: `,color:INK,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:R.temp.domLabel,color:'C07830',bold:true,size:21,italics:true,font:'Arial'}),
+          new TextRun({text:`. ${R.global>=70?'El perfil general es altamente favorable para el cargo, con fortalezas sobresalientes en todas las dimensiones evaluadas.':'El perfil muestra potencial con áreas de desarrollo a acompañar mediante plan de inducción y supervisión.'}`,color:INK,size:21,italics:true,font:'Arial'}),
+        ]}),
+      sp(80),
+      // Observaciones
+      new Paragraph({shading:{fill:INK,type:ShadingType.CLEAR},spacing:{before:0,after:0},children:[
+        new TextRun({text:'   OBSERVACIONES DE LA LICDA. LOURDES MONTERROSO   ',color:GOLD,bold:true,size:20,font:'Arial',allCaps:true})
+      ]}),
+      ...[1,2,3,4,5,6].map(()=>new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:4,color:'C8A84B'}},spacing:{before:160,after:0},children:[new TextRun({text:' ',font:'Arial'})]})),
+      sp(100),
+      // Recomendación
+      new Paragraph({shading:{fill:INK,type:ShadingType.CLEAR},spacing:{before:0,after:0},children:[
+        new TextRun({text:'   RECOMENDACIÓN FINAL DE SELECCIÓN   ',color:GOLD,bold:true,size:20,font:'Arial',allCaps:true})
+      ]}),
+      sp(60),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[3000,3000,3000],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:SAGE_L,type:ShadingType.CLEAR},margins:pad,borders:bord(SAGE),
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'☐  APTO/A',color:SAGE,bold:true,size:24,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'CONTRATAR',color:SAGE,bold:true,size:18,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:'FFFBF0',type:ShadingType.CLEAR},margins:pad,borders:bord('D4A800'),
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'☐  APTO/A CON RESERVAS',color:'9A6800',bold:true,size:19,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'ENTREVISTA ADICIONAL',color:'9A6800',size:17,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:3000,type:WidthType.DXA},shading:{fill:'FFF0F0',type:ShadingType.CLEAR},margins:pad,borders:bord('C0392B'),
+            children:[
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'☐  NO APTO/A',color:'C0392B',bold:true,size:24,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'NO CONTINÚA',color:'C0392B',size:18,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+      sp(120),
+      new Table({width:{size:9000,type:WidthType.DXA},columnWidths:[4500,4500],rows:[
+        new TableRow({children:[
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:pad,borders:nob,
+            children:[
+              new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:4,color:'333333'}},spacing:{before:120,after:20},children:[new TextRun({text:' ',font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Licda. Lourdes Monterroso',color:INK,bold:true,size:20,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Psicóloga Industrial y Organizacional',color:MUTED,size:18,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Clínica Cuidando tu Salud Mental',color:MUTED,size:18,font:'Arial'})]}),
+            ]}),
+          new TableCell({width:{size:4500,type:WidthType.DXA},shading:{fill:WHITE,type:ShadingType.CLEAR},margins:pad,borders:nob,
+            children:[
+              new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:4,color:'333333'}},spacing:{before:120,after:20},children:[new TextRun({text:' ',font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Fecha: ______________________',color:INK,size:20,font:'Arial'})]}),
+              new Paragraph({alignment:AlignmentType.CENTER,children:[new TextRun({text:'Sello Institucional',color:MUTED,size:18,italics:true,font:'Arial'})]}),
+            ]}),
+        ]}),
+      ]}),
+    ];
+
+    const doc = new Document({
+      styles:{default:{document:{run:{font:'Arial',size:22}}}},
+      numbering:{config:[]},
+      sections:[{
+        properties:{page:{size:{width:12240,height:15840},margin:{top:1080,right:1080,bottom:1080,left:1080}}},
+        headers:{default:new Header({children:[
+          new Table({width:{size:10080,type:WidthType.DXA},columnWidths:[7080,3000],rows:[
+            new TableRow({children:[
+              new TableCell({width:{size:7080,type:WidthType.DXA},borders:nob,margins:{top:40,bottom:40,left:0,right:0},
+                children:[new Paragraph({border:{bottom:{style:BorderStyle.SINGLE,size:6,color:GOLD}},spacing:{after:40},
+                  children:[
+                    new TextRun({text:'Clínica Cuidando tu Salud Mental  ·  ',color:GOLD,bold:true,size:16,font:'Arial'}),
+                    new TextRun({text:'Licda. Lourdes Monterroso',color:INK,size:16,font:'Arial'}),
+                  ]})]}),
+              new TableCell({width:{size:3000,type:WidthType.DXA},borders:nob,margins:{top:40,bottom:40,left:0,right:0},
+                children:[new Paragraph({alignment:AlignmentType.RIGHT,border:{bottom:{style:BorderStyle.SINGLE,size:6,color:GOLD}},spacing:{after:40},
+                  children:[new TextRun({text:`Informe Confidencial · ${candidate.fecha}`,color:MUTED,size:14,italics:true,font:'Arial'})]})]}),
+            ]}),
+          ]}),
+        ]})},
+        footers:{default:new Footer({children:[new Paragraph({
+          border:{top:{style:BorderStyle.SINGLE,size:4,color:GOLD}},
+          spacing:{before:60},
+          children:[
+            new TextRun({text:`Informe Psicológico Confidencial — ${candidate.nombre} — Clínica Cuidando tu Salud Mental · Licda. Lourdes Monterroso`,color:MUTED,size:15,font:'Arial'}),
+          ],
+        })]})},
+        children:[...portada,...resumen,...secIE,...secLid,...secTemp,...secPerf,...secConc],
+      }],
+    });
+
+    const buf = await Packer.toBuffer(doc);
+    const blob = new Blob([buf],{type:'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `ClinicaLM_Informe_${fname}_${new Date().toISOString().slice(0,10)}.docx`;
+    document.body.appendChild(a);a.click();
+    document.body.removeChild(a);URL.revokeObjectURL(url);
+    btn.textContent='✓ DESCARGADO';
+    setTimeout(()=>{btn.textContent='⬇ DESCARGAR INFORME WORD';btn.disabled=false;},3000);
+  }catch(e){
+    console.error(e);
+    btn.textContent='⬇ DESCARGAR INFORME WORD';btn.disabled=false;
+    alert('Error al generar el Word. Por favor use el botón Imprimir como alternativa.');
+  }
+}
+
+function resetAll(){
+  if(!confirm('¿Iniciar nueva evaluación? Se perderán los datos actuales.'))return;
+  answers={};candidate={};
+  try{localStorage.removeItem('clm_ans');localStorage.removeItem('clm_cand');}catch(e){}
+  document.getElementById('progress-bar-wrap').style.display='none';
+  document.getElementById('section-tabs').style.display='none';
+  showScreen('intro');
+}
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded',()=>{
+  loadSaved();
+  document.getElementById('f-fecha').valueAsDate=new Date();
+  if(candidate.nombre) document.getElementById('f-nombre').value=candidate.nombre;
+  updateProgress();
+});
+</script>
+</body>
+</html>
